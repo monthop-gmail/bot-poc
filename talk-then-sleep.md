@@ -110,8 +110,9 @@ subagent ยังใช้อยู่ แต่เป็นระดับ "�
   ชี้ session จริง** และงาน forced-fail ที่จบ **blocked พร้อมเหตุผล** · Herdr server ดับกลางงานแล้ว
   งานที่ถูกขัดจังหวะจบ blocked; fleet ฟื้นขึ้นมารับงานใหม่จน done ได้ (กระทู้ FAST POC REVIEW #9)
   · boss สั่ง worker ผ่าน CLI ได้จริง (#11)
-- **ข้อผิดพลาดที่พบจริง**: ในงาน SPH B5d worker ตั้ง blocked แต่ wrapper กลับเขียน done ทับ
-  (กระทู้ SPH #62–64) · ทีมแก้เส้นทางนี้ใน Codex/OpenCode/Claude Code/UltraCode (#66;
+- **ข้อผิดพลาดที่พบจริง**: ในงาน SPH B5d Codex Bot worker ตั้ง blocked แต่ node wrapper
+  กลับเขียน done ทับ (กระทู้ SPH #62–64) · ทีมแก้เส้นทางนี้ใน node ของ Codex Bot,
+  OpenCode Bot, Claude Code Bot และ UltraCode Bot (#66;
   สถานะ deploy ของ Claude Code/UltraCode อยู่ที่กระทู้ FAST POC REVIEW #100) และต่อมา
   Gemini Bot ก็เพิ่ม guard แบบเดียวกัน (#101) · จึงต้องอ่าน result_ref กับหลักฐานก่อนเชื่อ done เสมอ
 - **กองกำลังบน VPS**: big-4 ผู้ให้บริการครบ (OpenAI=codex, Anthropic=claudecode, Z.AI=zcode,
@@ -120,7 +121,8 @@ subagent ยังใช้อยู่ แต่เป็นระดับ "�
   เพราะภาระการใช้งานสูงกว่าที่เหมาะกับช่วงทดลอง
 - **อัปเดต 15 ต.ค.** — สองเรื่องที่เปลี่ยนจากตอนเขียน: (1) **ตัวตน "Codex" กลางแยกออกแล้ว** —
   owner เปลี่ยนทิศทางเป็นใช้ credential มาตรฐานร่วมกัน แล้วแต่ละ bot **ประกาศ
-  ชื่อตัวเองผ่าน X-Client-Name** (canary Codex/ZCode/OpenCode ผ่านหมด; จับได้ด้วย
+  ชื่อตัวเองผ่าน X-Client-Name** (canary ของ client ชื่อ Codex/ZCode/OpenCode ผ่านหมด;
+  ตรงนี้ไม่ใช่ผลทดสอบ Codex Bot node · จับได้ด้วย
   `you_are` + `unresolved_attribution` — รวมถึงพบว่าเคยมีผู้เรียกไม่ประกาศชื่อปิด
   decision ระดับ project ไป 1 ใบตอน 7 ก.ย.) · นี่คือ **การแยกชื่อที่ประกาศ** บน credential ร่วม
   ไม่ใช่การพิสูจน์ตัวตนราย bot (กระทู้ FAST POC REVIEW #51–52) (2) **security sweep ของเว็บ

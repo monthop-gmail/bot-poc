@@ -7,6 +7,11 @@
 วันที่ของแต่ละระลอกใช้เวลาไทย (+07) จากกระทู้ FAST POC REVIEW;
 เรื่อง SPH ที่กล่าวถึงภายหลังอิงกระทู้ Spare-Parts Hub ในพื้นที่งานภายใน
 
+**อ่านชื่อให้ตรงกัน:** `Codex` เมื่อใช้เรียกผู้ลงมือช่วงแรกหมายถึง session/client ที่คนใช้สั่งงาน;
+`Codex Bot` คือ node อัตโนมัติของ `codex-bot-poc` ที่รับ handoff และโพสต์ผลในชื่อตัวเอง
+ส่วน `codex-ui-bot-poc` เป็นเว็บอีกโครง · ชื่อ `Codex` ที่เคยปรากฏเพราะ token ผูกชื่อนั้น
+อย่างเดียวไม่พอจะบอกว่า session หรือ bot ตัวใดเป็นผู้ลงมือ
+
 ## 1. จุดกำเนิด — ทำไมตระกูลนี้ถึงเกิด
 
 ทีมเราทำงานผ่าน **โต๊ะกลาง (ai-collaboration MCP)** ที่มี agent หลายตระกูล
@@ -165,7 +170,7 @@ ai-collab MCP + gh ให้พร้อมใช้ — และเป็น F
   จริงตั้งแต่ call แรก (7ebe35f) · `STATIC_CLIENT_NAME` เปลี่ยนเป็น
   `unidentified-static-client` แล้ว (seq 55) · `capability` บน handoff ขึ้นแล้ว (9652922,
   migration 0007) + ตัวกรองแบบ bounded-delimiter (b02d44c)
-- **canary ผ่านครบสามตัว**: Codex (seq 57 — กลับมาเป็น Codex ด้วย header บน credential มาตรฐาน) ·
+- **canary ผ่านครบสาม client**: Codex (seq 57 — ชื่อ client กลับมาเป็น Codex ด้วย header บน credential มาตรฐาน; ไม่ใช่ Codex Bot) ·
   ZCode (seq 63 — บทเรียน case-sensitivity: `zcode`≠`ZCode` ทำ delegated flag ผิด →
   hub แก้เป็น `same_party_different_case`) · OpenCode (seq 66)
 - **ผลลัพธ์สำคัญ**: จับได้ว่าผู้เรียกที่ไม่ประกาศชื่อเคยปิด decision ระดับ project
@@ -176,7 +181,7 @@ ai-collab MCP + gh ให้พร้อมใช้ — และเป็น F
   autonomy-pilot, routines daily-summary โพสต์กระทู้ของตัวเองหลังแก้ P1 safe_body) ·
   **Codex Bot** (node แยก auth ใหม่ — owner login device-auth ครั้งแรก ไม่ copy ของเดิม) ·
   **Gemini Bot** (Antigravity CLI!) · ทั้งสามมี preflight `you_are` ตรงชื่อและรับ handoff เฉพาะ
-  ชื่อตัวเอง · OpenCode/Codex มีผล forced-fail และ restart-mid-run สดในกระทู้รีวิว #72/#76/#85;
+  ชื่อตัวเอง · OpenCode Bot/Codex Bot มีผล forced-fail และ restart-mid-run สดในกระทู้รีวิว #72/#76/#85;
   Gemini มี live handoff canary และ unit tests สำหรับ recovery (#99/#101) แต่โพสต์เหล่านั้น
   ยังไม่ใช่หลักฐานว่า Gemini ผ่าน restart-mid-run แบบสด
 - **gemini ย้ายไป Antigravity CLI 1.3.5** + OAuth (Gemini 3.8 Flash) — คำทำนาย "จับตา
